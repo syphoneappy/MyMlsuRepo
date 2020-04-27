@@ -21,7 +21,12 @@
         <form  class="mb-4" action="/CreateAScheme" method="post">
           <div class="col-12 d-flex mb-3">
           <div class="col-3"></div>
-          <input type="text" name="Scheme" value="" placeholder="Scheme Name" class="col-6 text-center">
+          <input type="text" name="Scheme" value="" placeholder="Scheme Id" class="col-6 text-center">
+          <div class="col-3"></div>
+          </div>
+          <div class="col-12 d-flex mb-3">
+          <div class="col-3"></div>
+          <input type="text" name="SchemeName" value="" placeholder="Scheme Name" class="col-6 text-center">
           <div class="col-3"></div>
           </div>
           <div class="col-12 d-flex justify-content-center">
@@ -32,7 +37,7 @@
           {% for row in user %}
           <div class="col-12 d-flex">
           <div class="col-9 text-center">
-            <p class="lead">{{row.0}}</p>
+            <p class="lead">{{row.2}}</p>
           </div>
           <div class="pretty p-svg p-curve p-pulse col-3">
           <input type="checkbox" name="table" value="{{row.0}}">
@@ -66,7 +71,7 @@
           {% for row in user %}
           <div class="col-12 d-flex">
           <div class="col-9 text-center">
-            <p class="lead">{{row.0}}</p>
+            <p class="lead">{{row.2}}</p>
           </div>
           <div class="pretty p-svg p-curve p-pulse col-3">
           <input type="checkbox" name="Change1" value="{{row.0}}">

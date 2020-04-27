@@ -3,7 +3,7 @@
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 10;
+  z-index: 1;
   left: 0;
   top: 0;
   background-color: black;
@@ -14,7 +14,7 @@
 }
 .overlay-content{
   position:relative;
-  top:15%;
+  top:25%;
   width:100%;
   text-align:center;
   margin-top:10px;
@@ -27,6 +27,9 @@
 }
 .point{
   cursor:pointer;
+}
+td,th{
+  padding:6px;
 }
 </style>
 <link rel="stylesheet" href="static/login.css"/>

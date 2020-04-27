@@ -19,29 +19,34 @@ MySQL = MySQL(app)
 @app.route("/Homes")
 def index():
     cur = MySQL.connection.cursor()
-    cur.execute("SHOW TABLES;")
+    cur.execute("select * from collegescheme;")
     data = cur.fetchall()
     cur.close()
     return render_template("index.html",user = data)
+@app.route('/deleteS/<string:id_data>', methods = ['POST','GET'])
+def delete(id_data):
+        cur = MySQL.connection.cursor()
+        cur.execute("DELETE FROM collegescheme WHERE id = %s",(id_data,))
+        MySQL.connection.commit()
+        flash("deleted")
+        return redirect("/Homes")
 @app.route("/views",methods=['GET','POST'])
 def views():
-    if request.method == 'POST':
         cur = MySQL.connection.cursor()
-        Selected = request.form['Selected']
-        cur.execute("select * from %s"%(Selected))
+        cur.execute("select * from collegescheme")
         MySQL.connection.commit()
         data = cur.fetchall()
         cur.close()
         return render_template("view.html",users = data)
-    return render_template("index.html")
 #------------------------Create Table----------------------
 @app.route("/CreateAScheme",methods=['GET','POST'])
 def CreateAScheme():
     if request.method == 'POST':
         userDetails = request.form
         Scheme = userDetails['Scheme']
+        SchemeName = userDetails['SchemeName']
         con = MySQL.connection.cursor()
-        con.execute("CREATE TABLE %s (id int NOT NULL AUTO_INCREMENT, Course varchar(255) NOT NULL, Year varchar(255), PRIMARY KEY(id));" %(Scheme))
+        con.execute("INSERT into collegescheme (Scheme_Id,Scheme_Name) values('%s','%s')"%(Scheme,SchemeName))
         MySQL.connection.commit()
         con.close()
         flash("Succesfully Created Scheme")
@@ -51,11 +56,10 @@ def CreateAScheme():
 def insertInScheme():
     if request.method == 'POST':
         userDetails = request.form
-        table = userDetails['table']
         Course = userDetails['Course']
         Year = userDetails['Year']
         con = MySQL.connection.cursor()
-        con.execute("INSERT INTO %s \n (Course,Year) values('%s', '%s')"%(table,Course,Year))
+        con.execute("INSERT INTO collegecourse (Cname,Year) values('%s', '%s')"%(Course,Year))
         MySQL.connection.commit()
         con.close()
         flash("Inserted In Scheme")
