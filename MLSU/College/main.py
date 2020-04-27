@@ -92,6 +92,7 @@ def updateInTable(id):
         return redirect('/Homes')
     return "Cannot fetch"
 #----------------------------Excel---------------------
+#*********************This Not Working Now*************
 @app.route('/Excel/',methods = ['POST','GET'])
 def Excel():
     con=connect(user="root",password="1234",host="localhost",database="mlsu")
