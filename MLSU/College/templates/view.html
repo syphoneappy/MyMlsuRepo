@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include "style.css" %}
+  <title>Document</title>
+</head>
+<body>
+  {% include "nav.html" %}
+  <table class="container mt-4">
+    <h1 class="display-4 text-center">Course Information<h1>
+    <tr class="text-center text-light bg-secondary">
+      <th class="border-left border-top border-bottom border-dark">S.NO/Id</th>
+      <th class="border-left border-top border-bottom border-dark">Course</th>
+      <th class="border-left border-top border-bottom border-dark">Year</th>
+      <th class="border-left border-top border-bottom border-dark">update</th>
+      <th class="border-left border-top border-bottom border-right border-dark">delete</th>
+    </tr>
+    {% for row in users %}
+    <tr class="text-center">
+      <td class="border-left border-top border-bottom border-dark bg-light">{{row.0}}</td>
+      <td class="border-left border-top border-bottom border-dark">{{row.1}}</td>
+      <td class="border-left border-top border-bottom border-dark bg-light">{{row.2}}</td>
+      <td class="border-left border-top border-bottom border-dark bg-light">
+          <a href="/updates/" data-toggle="modal" data-target="#edit">
+          edit
+        </a>
+      </td>
+      <td class="border-left border-top border-bottom border-right border-dark"><a href="/delete/id">delete</a></td>
+    </tr>
+    {% endfor %}<br>
+    {% for row in user %}
+    {{row}}
+    {% endfor %}
+  </table>
+  {% include "Script.html" %}
+</body>
+</html>

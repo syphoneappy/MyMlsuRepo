@@ -1,0 +1,43 @@
+$primary-color:#fff;
+$secondary-color:#333;
+$cyan:cyan;
+
+input{
+  border-right:0px;
+  border-top:0px;
+  border-left:0px;
+  border-bottom:1px solid $secondary-color;
+}
+input:hover{
+  transition:0.3s;
+  border-bottom:1px solid $cyan;
+}
+.inputFile{
+     width:0.1px;
+     height:0.1px;
+     opacity: 0;
+     overflow:hidden;
+     position:absolute;
+     z-index:-1;
+   label{
+     cursor:pointer;
+   }
+}
+.overlay{
+  height:100%;
+  width:0;
+  position:fixed;
+  z-index:1;
+  left:0;
+  top:0;
+  background-color:rgb(0,0,0);
+  background-color:rgba(0,0,0,0.9);
+  overflow-x:hidden;
+  transition:0.5s;
+  .closebtn{
+    position:absolute;
+    top:20px;
+    right:45px;
+    font-size:60px;
+  }
+}

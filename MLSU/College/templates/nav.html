@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-md navbar-light">
+  <span class="navbar-brand mb-0 h1 display-4">MLSU</span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+   </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div class="overlay-content">
+      <form class="" action="/views" method="post">
+      {% for row in user %}
+      <div class="col-12 d-flex">
+      <div class="col-9 text-center">
+        <p class="lead text-light">{{row.0}}</p>
+      </div>
+      <div class="pretty p-svg p-curve p-pulse col-3">
+      <input type="checkbox" name="Selected" value="{{row.0}}" class="check">
+      <div class="state p-primary col-12">
+       <svg class="svg svg-icon" viewBox="0 0 20 20">
+          <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+       </svg>
+       <label for=""></label>
+      </div>
+      </div>
+      </div>
+      {% endfor %}
+           <a href="/Excel/">Convert In Excel</a>
+      <input type="submit" value="View" class="btn btn-light mb-3">
+      </form>
+      </div>
+      </div>
+    <span onclick="openNav()" class="point">&#9776;   View</span>
+    </ul>
+  </div>
+</nav>
