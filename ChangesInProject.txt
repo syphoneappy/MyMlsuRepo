@@ -1,0 +1,2 @@
+College And Student platform are different but database is same
+And This File is not uploaded on GitHub
