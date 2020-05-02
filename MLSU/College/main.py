@@ -1,4 +1,5 @@
-from flask import Flask, render_template , flash,request,session,abort,redirect,url_for
+from flask import Flask, render_template , flash,request,session,abort,redirect,url_for,send_file
+from flask_login import login_manager, login_required,logout_user
 from pymysql import *
 from werkzeug.utils import secure_filename
 from flask_mysqldb import MySQL
@@ -16,17 +17,98 @@ app.config["MYSQL_PASSWORD"] =  db['mysql_password']
 app.config["MYSQL_DB"] =  db['mysql_db']
 MySQL = MySQL(app)
 
-@app.route("/Homes")
+
+@app.route('/', methods=['GET','POST'])
 def index():
+    msg = ''
+    if request.method == 'POST' and 'userId' in request.form and 'password' in request.form:
+        userDetails = request.form
+        RegisterNumber = userDetails['userId']
+        password = userDetails['password']
+        if len(password) < 8:
+            flash("Password Should have atlest 8 char")
+        elif re.search('[0-9]',password) is None:
+            flash("Make sure you have Any One Numeric Value")
+        elif re.search('[A-Z]',password) is None:
+            flash("Make Sure you have One Capital letter")
+        else:
+            cursor = MySQL.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute('SELECT * FROM collauth Where RegistrationId = %s OR ProfName = %s AND Password =%s',(RegisterNumber,RegisterNumber,password,))
+            accounts = cursor.fetchone()
+            if accounts:
+                session['loggedin'] = True
+                session['ClgId'] = accounts['ClgId']
+                session['RegistrationId'] = accounts['RegistrationId']
+                session['ProfName'] = accounts['ProfName']
+                return redirect('/Homes')
+            else:
+                msg = 'Incorrect username or password!'
+    return render_template('LogIn.html',msg = msg)
+
+@app.route("/Register",methods =['GET','POST'])
+def Register():
+    msg = ''
+    if request.method == 'POST' and 'userId' in request.form and 'password' in request.form and 'Prof.Name' in request.form:
+        userDetails = request.form
+        AnId = userDetails['userId']
+        Psw = userDetails['Prof.Name']
+        password = userDetails['password']
+        if len(password) < 8:
+            flash("Password Should have atlest 8 char")
+        elif re.search('[0-9]',password) is None:
+            flash("Make sure you have Any One Numeric Value")
+        elif re.search('[A-Z]',password) is None:
+            flash("Make Sure you have One Capital letter")
+        else:
+              con = MySQL.connection.cursor(MySQLdb.cursors.DictCursor)
+              con.execute("insert into CollAuth( RegistrationId,ProfName,Password) value(%s, %s, %s)",(AnId,Psw,password))
+              MySQL.connection.commit()
+              msg = "Succesfully Created Your Account"
+              return redirect("/Homes")
+    return render_template('Register.html',msg = msg)
+
+@app.route('/LogOut')
+def LogOut():
+    session.pop('loggedin',None)
+    session.pop('ClgId',None)
+    session.pop('RegistrationId',None)
+    session.clear()
+    msg = "Logged Out Succesfully"
+    return render_template('LogIN.html',LogOutMessage=msg)
+@app.route('/Excel')
+def Excel():
+    con=connect(user="root",password="1234",host="localhost",database="mlsu")
+    flaskapp = sql.read_sql('select id,Scheme_Id,Scheme_Name,Cname,Year from collegecourse,collegescheme',con)
+    print(flaskapp)
+    flaskapp.to_excel('Excel.xls')
+    flash('Data has been saved in excel')
+    return redirect('/Homes')
+
+@app.route("/download")
+def download():
+    path = "./Excel.xls"
+    return send_file(path,as_attachment=True)
+
+@app.route("/Homes")
+def Homes():
     cur = MySQL.connection.cursor()
-    cur.execute("select * from collegescheme;")
+    cur.execute("select * from collegescheme,collegecourse;")
     data = cur.fetchall()
     cur.close()
-    return render_template("index.html",user = data)
+    if 'loggedin' in session:
+        return render_template("index.html",user = data, username=session['RegistrationId'],Name=session['ProfName'])
+    return render_template('Error.html')
 @app.route('/deleteS/<string:id_data>', methods = ['POST','GET'])
-def delete(id_data):
+def deleteS(id_data):
         cur = MySQL.connection.cursor()
         cur.execute("DELETE FROM collegescheme WHERE id = %s",(id_data,))
+        MySQL.connection.commit()
+        flash("deleted")
+        return redirect("/Homes")
+@app.route('/deleteC/<string:id_data>', methods = ['POST','GET'])
+def deleteC(id_data):
+        cur = MySQL.connection.cursor()
+        cur.execute("DELETE FROM collegecourse WHERE Cid = %s",(id_data,))
         MySQL.connection.commit()
         flash("deleted")
         return redirect("/Homes")
@@ -67,19 +149,19 @@ def insertInScheme():
     return "Cannot Fetch"
 
 #--------------------UpdateInScheme---------------------
-@app.route("/updateInScheme",methods=['GET','POST'])
-def update():
+@app.route("/updateS/<string:id>",methods=['GET','POST'])
+def update(id):
     if request.method == 'POST':
         userDetails = request.form
-        table1 = userDetails['Change1']
-        table2 = userDetails['Change2']
+        SchemeId = userDetails['SchemeIdU']
+        SchemeName = userDetails['SchemeNameU']
         con = MySQL.connection.cursor()
-        con.execute("RENAME TABLE %s TO %s"%(table1,table2))
+        con.execute("UPDATE collegescheme SET Scheme_Id = %s, Scheme_Name =%s, WHERE id = %s"%(SchemeId,SchemeName,id,))
         MySQL.connection.commit()
         con.close()
         flash("Updated In Scheme")
         return redirect('/Homes')
-    return "cannot Fetch"
+    return render_template("UpdateChech.html")
 #-----------------------UpdateInScheme--------------------------------
 @app.route("/updateInTable/<int:id>",methods=['GET','POST'])
 def updateInTable(id):
@@ -95,17 +177,6 @@ def updateInTable(id):
         flash("UPDATED Succesfully")
         return redirect('/Homes')
     return "Cannot fetch"
-#----------------------------Excel---------------------
-#*********************This Not Working Now*************
-@app.route('/Excel/',methods = ['POST','GET'])
-def Excel():
-    con=connect(user="root",password="1234",host="localhost",database="mlsu")
-    Selected = request.form["Selected"]
-    flaskapp=sql.read_sql('select * from %s'%(Selected))
-    print(flaskapp)
-    flaskapp.to_excel('Excel.xls')
-    flash('data Has been Saved In Excel')
-    return "Converted"
 #---------------------------exit-------------------------
 if __name__ == "__main__":
             app.run(debug=True)

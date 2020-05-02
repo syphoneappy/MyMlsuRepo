@@ -11,8 +11,8 @@
         <table class="mr-5 mt-5">
           <tr class="text-center text-light">
             <th class="border-left border-top border-bottom border-light lead">S.NO/Id</th>
-            <th class="border-left border-top border-bottom border-light lead">Course</th>
-            <th class="border-left border-top border-bottom border-light lead">Year</th>
+            <th class="border-left border-top border-bottom border-light lead">Scheme Id</th>
+            <th class="border-left border-top border-bottom border-light lead">Scheme Name</th>
             <th class="border-left border-top border-bottom border-light lead">update</th>
             <th class="border-left border-top border-bottom border-right border-light lead">delete</th>
           </tr>
@@ -22,23 +22,23 @@
             <td class="border-left border-top border-bottom border-light">{{row.1}}</td>
             <td class="border-left border-top border-bottom border-light">{{row.2}}</td>
             <td class="border-left border-top border-bottom border-light">
-                <a href="/updates/" data-toggle="modal" data-target="#edit">
+                <a href="/updateS/{{row.0}}" data-toggle="modal" data-target="#edit">
                 edit
               </a>
             </td>
-            <td class="border-left border-top border-bottom border-right border-dark"><a href="/delete/{{row.0}}">delete</a></td>
+            <td class="border-left border-top border-bottom border-right border-light"><a href="/deleteS/{{row.0}}">delete</a></td>
           </tr>
           {% endfor %}<br>
         </table>
         <table class="m-5 p-3">
           <tr class="text-center text-light bg-secondary">
-            <th class="border-left border-top border-bottom border-dark">S.NO/Id</th>
-            <th class="border-left border-top border-bottom border-dark">Course</th>
-            <th class="border-left border-top border-bottom border-dark">Year</th>
-            <th class="border-left border-top border-bottom border-dark">update</th>
-            <th class="border-left border-top border-bottom border-right border-dark">delete</th>
+            <th class="border-left border-top border-bottom border-dark lead">S.NO/Id</th>
+            <th class="border-left border-top border-bottom border-dark lead">Course</th>
+            <th class="border-left border-top border-bottom border-dark lead">Year</th>
+            <th class="border-left border-top border-bottom border-dark lead">update</th>
+            <th class="border-left border-top border-bottom border-right border-dark lead">delete</th>
           </tr>
-          <!-- {% for row in user %}
+          {% for row in user %}
           <tr class="text-center bg-light">
             <td class="border-left border-top border-bottom border-dark">{{row.3}}</td>
             <td class="border-left border-top border-bottom border-dark">{{row.4}}</td>
@@ -48,13 +48,22 @@
                 edit
               </a>
             </td>
-            <td class="border-left border-top border-bottom border-right border-dark"><a href="/deleteS/{{row.0}}">delete</a></td>
+            <td class="border-left border-top border-bottom border-right border-dark"><a href="/deleteC/{{row.3}}">delete</a></td>
           </tr>
-          {% endfor %}<br> -->
+          {% endfor %}<br>
         </table>
+       </div>
+       <div class="col-12  d-flex mt-4">
+       <div class="col-6 d-flex justify-content-center">
+         <a href="/Excel" class="btn btn-block btn-danger">Convert into Excel</a>
+       </div>
+       <div class="col-6 d-flex justify-content-center">
+         <a href="/download" class="btn btn-block btn-warning">download Excel</a>
+       </div>
        </div>
       </div>
     <span onclick="openNav()" class="point">&#9776;   View</span>
     </ul>
+    <a href="/LogOut" class="float-right lead text-danger">LogOut</a>
   </div>
 </nav>

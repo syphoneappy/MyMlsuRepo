@@ -6,6 +6,15 @@
 </head>
 <body>
   {% include "nav.html" %}
+  <div class="d-flex">
+    <div class="col-6 col-6 d-flex justify-content-center ">
+      <p class="lead m-0 p-0">Your Registration Id -:  <kbd class="small">{{ username }}</kbd></p>
+    </div>
+    <div class="col-6 col-6 d-flex justify-content-center ">
+      <p class="lead m-0 p-0">Prof. Name -:  <kbd class="small">{{Name}}</kbd></p>
+    </div>
+  </div>
+  <div id="hide">
   {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for message in messages %}
@@ -15,6 +24,7 @@
         {% endfor %}
         {% endif %}
   {% endwith %}
+  </div>
   <div class="container">
     <div class="row d-flex">
       <div class="col-6 mt-2 border-right">

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Document</title>
+  <link rel="stylesheet" href="static/login.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body >
+     <div class="container">
+       <div class="text-center bg-danger">
+         {{ LogOutMessage }}
+       </div>
+       <form class="" action="/" method="post">
+       <div class="row mt-4">
+         <div class="col-12">
+           <p class="lead text-center m-0"><strong>College Portal</strong></p>
+             <h1 class="display-3 text-center m-0">Log-In</h1>
+         </div>
+        <div class="col-4"></div>
+        <div class="col-4 mt-3 d-flex justify-content-center">
+          <input type="text" name="userId" value="" class="text-center text-small p-2" placeholder="ID Or Prof. Name" required>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4 mt-3 d-flex justify-content-center"><input type="password" name="password" value="" placeholder="password" class="text-center p-2" required>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-12 mt-3 d-flex justify-content-center">
+          <a href="#">Forget Password</a>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning d-flex justify-content-center col-12 mt-4" role="alert">
+          {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div class="col-12 mt-3 d-flex justify-content-center">
+          <strong>
+       <a href="/Register" class="text-warning">Register</a>
+         </strong>
+        </div>
+          <div class="d-flex justify-content-center col-12 m-2 text-danger blockquote">
+          {{ msg }}
+          </div>
+        <div class="col-12 d-flex justify-content-center mt-3">
+            <button type="submit" name="button" class=" btn border border-secondary pl-3 pr-3 text-secondary">submit</button>
+        </div>
+         </div>
+       </form>
+     </div>
+</body>
+</html>
