@@ -33,13 +33,14 @@ def index():
             flash("Make Sure you have One Capital letter")
         else:
             cursor = MySQL.connection.cursor(MySQLdb.cursors.DictCursor)
-            cursor.execute('SELECT * FROM collauth Where RegistrationId = %s OR ProfName = %s AND Password =%s',(RegisterNumber,RegisterNumber,password,))
+            cursor.execute('SELECT * FROM collauth Where (RegistrationId = %s OR ProfName = %s) AND Password=%s',(RegisterNumber,RegisterNumber,password,))
             accounts = cursor.fetchone()
             if accounts:
                 session['loggedin'] = True
                 session['ClgId'] = accounts['ClgId']
                 session['RegistrationId'] = accounts['RegistrationId']
                 session['ProfName'] = accounts['ProfName']
+                session['Password'] = accounts['Password']
                 return redirect('/Homes')
             else:
                 msg = 'Incorrect username or password!'
@@ -60,13 +61,24 @@ def Register():
         elif re.search('[A-Z]',password) is None:
             flash("Make Sure you have One Capital letter")
         else:
-              con = MySQL.connection.cursor(MySQLdb.cursors.DictCursor)
-              con.execute("insert into CollAuth( RegistrationId,ProfName,Password) value(%s, %s, %s)",(AnId,Psw,password))
-              MySQL.connection.commit()
-              msg = "Succesfully Created Your Account"
-              return redirect("/Homes")
-    return render_template('Register.html',msg = msg)
-
+            con = MySQL.connection.cursor(MySQLdb.cursors.DictCursor)
+            con.execute("insert into CollAuth( RegistrationId,ProfName,Password) value(%s, %s, %s)",(AnId,Psw,password))
+            cur = MySQL.connection.cursor()
+            cursor = MySQL.connection.cursor(MySQLdb.cursors.DictCursor)
+            cur.execute("select * from collegescheme,collegecourse;")
+            cursor.execute('SELECT * FROM collauth Where RegistrationId = %s OR ProfName = %s AND Password =%s;',(AnId,Psw,password))
+            data = cur.fetchall()
+            MySQL.connection.commit()
+            msg = "Succesfully Created Your Account"
+            accounts = cursor.fetchone()
+            if accounts:
+                session['loggedin'] = True
+                session['ClgId'] = accounts['ClgId']
+                session['RegistrationId'] = accounts['RegistrationId']
+                session['ProfName'] = accounts['ProfName']
+                return render_template("index.html",msg = msg, user = data,username = session["RegistrationId"],Name=session['ProfName'])
+    return render_template("Register.html")
+#----------------------------------------------------------------------------
 @app.route('/LogOut')
 def LogOut():
     session.pop('loggedin',None)

@@ -16,9 +16,11 @@ app.config["MYSQL_PASSWORD"] =  db['mysql_password']
 app.config["MYSQL_DB"] =  db['mysql_db']
 MySQL = MySQL(app)
 
-@app.route("/")
+@app.route("/", methods=['GET','POST'])
 def index():
-    return "<h1>Welcome Students Portal</h1>"
+    return """<h1 style='text-align:center;margin-top:200px;'><kbd>Welcome To student Portal</kbd></h1>
+              <h3 style='text-align:center'><kbd>Work In progress...</kbd></h3>
+     """
 
 if __name__ == "__main__":
             app.run(debug=True)
