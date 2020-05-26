@@ -15,9 +15,8 @@ app.config["MYSQL_HOST"] =  db['mysql_host']
 app.config["MYSQL_USER"] =  db['mysql_user']
 app.config["MYSQL_PASSWORD"] =  db['mysql_password']
 app.config["MYSQL_DB"] =  db['mysql_db']
+
 MySQL = MySQL(app)
-
-
 @app.route('/', methods=['GET','POST'])
 def index():
     msg = ''
@@ -189,6 +188,19 @@ def updateInTable(id):
         flash("UPDATED Succesfully")
         return redirect('/Homes')
     return "Cannot fetch"
+@app.route("/ForgetPass", methods=['GET','POST'])
+def ForgetPass():
+    if request.method == 'POST':
+        userDetails = request.form
+        Id = userDetails['Id']
+        NewPassword = userDetails['NewPassword']
+        con = MySQL.connection.cursor()
+        con.execute("UPDATE collauth SET Password = '%s' WHERE RegistrationId = '%s'"%(NewPassword,Id))
+        MySQL.connection.commit()
+        con.close()
+        flash("Password Changed Succesfully")
+        return redirect("/")
+    return render_template("Forget.html")
 #---------------------------exit-------------------------
 if __name__ == "__main__":
             app.run(debug=True)
