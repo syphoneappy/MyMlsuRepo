@@ -16,10 +16,14 @@ app.config["MYSQL_PASSWORD"] =  db['mysql_password']
 app.config["MYSQL_DB"] =  db['mysql_db']
 app.config["SERVER_NAME"] = 'localhost:8000'
 MySQL = MySQL(app)
-
+@app.route('/test')
+def test():
+    return render_template('LogIn.html')
+def func_name(foo):
+    return render_template('expression')
 @app.route("/", methods=['GET','POST'])
 def index():
-    seconds = 2
+    seconds = 1
     for i in range(seconds):
         times = print(str(seconds - i) + "seconds remain")
         time.sleep(1)
