@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Document</title>
+  <style>
+    border{
+      border: 1px solid black;
+      width: 100%;
+      height:100vh;
+    }
+  </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+ <div class="container">
+ <h1>Form</h1>
+  <div class="chip">
+    <img src="">
+    {{Email}}
+  </div>
+ <form action="/RegFormFill" method="post" enctype="multipart/form-data">
+   <div class="collection">
+      <p href="#!" class="collection-item card-panel red white-text"><kbd>Note:</kbd>Once the name is Enter cannot be changed!</p>
+   </div>
+     <div class="row">
+       <input type="text" name="Roll" value="{{RollNo}}" hidden>
+           <div class="input-field col s12">
+             <input placeholder="Enter Your Name" id="first_name" type="text" class="validate" name="Name">
+             <label for="first_name">Enter Full Name</label>
+           </div>
+        <div class="col s12 border">
+          <div class="col s8">
+            <div class="col s12"></div>
+            <div class="file-field input-field col s12">
+             <div class="btn">
+               <span>Profile Picture</span>
+               <input type="file" multiple name="file">
+               </div>
+               <div class="file-path-wrapper">
+               <input class="file-path validate" type="text" placeholder="Upload one file" name="file">
+               </div>
+             </div>
+            <div class="col s12"></div>
+          </div>
+          <div class="col s4">
+            {{msg}}
+            <img src="./static/images/{{image}}" alt="">
+            {{Email}}
+          </div>
+        </div>
+        <div class="col s12 center-align">
+          <button class="btn purple darken-4 waves-effect waves-light" type="submit">Submit
+          <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+ </form>
+ </div>
+ <script>
+   document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.chips');
+  var instances = M.Chips.init(elems);
+});
+document.addEventListener('DOMContentLoaded', function() {
+   var elems = document.querySelectorAll('.autocomplete');
+   var instances = M.Autocomplete.init(elems);
+ });
+ </script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

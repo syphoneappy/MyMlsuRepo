@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include 'css.html'%}
+<link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <style>
+  .text{
+    font-family: 'Satisfy', cursive;
+    font-size:32px;
+    color:#333;
+  }
+  </style>
+</head>
+<body>
+  {% include 'SocialNav.html'%}
+  <div class="container mb-2">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success d-flex justify-content-center col-12 mt-4" role="alert">
+      {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="row">
+  <div class="col-12">
+  {% for page in data%}
+  <div class="chip col-12 d-flex mb-1 mt-1">
+  <a href="/Profile/{{page.1}}"><img src="static/images/{{page.5}}" alt="" class="rounded m-1"width=100 height=100></a>
+  <div class="col-6 mt-4">
+  <a href="/Profile/{{page.1}}" class="lead text-center text">{{page.3}} {{page.6}}</a>
+  </div>
+  <form action="/Accepted" method="post" class="col-4 float-right">
+  <input type="text" value="{{page.0}}" name="id">
+  <input type="text" value="{{page.4}}" name="user1">
+  <input type="text" value="{{page.6}}" name="user2">
+  <button type="submit" class="btn btn-success">Accept</button>
+  <a class="btn btn-danger" href="/deleteReq/{{page.0}}">Decline</a>
+  </form>
+  </div>
+  <hr class="m-0">
+  {%endfor%}
+  </div>
+  </div>
+</div>
+  {% include 'script.html'%}
+</body>
+</html>

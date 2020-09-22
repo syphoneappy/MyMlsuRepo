@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include 'css.html'%}
+<style>
+.uploader {
+  position:relative;
+  overflow:hidden;
+  width:350px;
+  height:350px;
+  background:#f3f3f3;
+  border:2px dashed #e8e8e8;
+}
+
+#filePhoto{
+  position:absolute;
+  width:400px;
+  height:400px;
+  top:-50px;
+  left:0;
+  z-index:2;
+  opacity:0;
+  cursor:pointer;
+}
+#fileP{
+  position:absolute;
+  width:400px;
+  height:400px;
+  top:-50px;
+  left:0;
+  z-index:2;
+  opacity:0;
+  cursor:pointer;
+}
+
+.uploader img{
+  position:absolute;
+  width:352px;
+  height:352px;
+  top:-1px;
+  left:-1px;
+  z-index:1;
+  border:none;
+}
+</style>
+</head>
+<body>
+{% include 'SocialNav.html'%}
+<div class="container">
+  <!-- Nav tabs -->
+<ul class="nav nav-tabs md-tabs nav-justified dark-color" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#panel555" role="tab">
+      <i class="fas fa-user pr-2"></i>Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#panel666" role="tab">
+      <i class="fas fa-heart pr-2"></i>draft</a>
+  </li>
+</ul>
+<!-- Nav tabs -->
+
+<!-- Tab panels -->
+<div class="tab-content">
+
+  <!-- Panel 1 -->
+  <div class="tab-pane fade in show active" id="panel555" role="tabpanel">
+
+    <!-- Nav tabs -->
+    <div class="row">
+
+      <div class="col-md-3 mt-5 pt-3">
+        <ul class="nav md-pills pills-primary flex-column" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#panel21" role="tab">
+              <i class="fas fa-camera mr-2"></i>Upload photo
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel22" role="tab">
+              <i class="fas fa-video mr-2"></i>Upload Video
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <!-- Tab panels -->
+        <div class="tab-content vertical">
+          <!-- Panel 1 -->
+          <div class="tab-pane fade in show active" id="panel21" role="tabpanel">
+            <h5 class="my-2 h5">Panel 1</h5>
+            <form class="mb-5 pb-5" action="/uploader" method="post" enctype="multipart/form-data">
+              <div class="media">
+  <div class="media-body">
+    <div class="media mt-3 shadow-textarea">
+      <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="/static/images/{{image}}"
+        alt="Generic placeholder image" width=100 height=100>
+      <div class="media-body">
+        <h5 class="mt-0 font-weight-bold blue-text">{{Name}}</h5>
+        <div class="form-group basic-textarea rounded-corners">
+          <textarea class="form-control z-depth-1" id="exampleFormControlTextarea345" rows="3" placeholder="Write your comment..." name="comment"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="md-form d-flex justify-content-center col-12">
+              <div class="uploader" onclick="$('#fileP').click()">
+                 <p class"display-4 text-center d-flex justify-content-center"><i class="fas fa-upload fa-10x mt-5 ml-5 pl-5 pt-5" ></i>
+                 <img src=""/>
+                 <input type="file" name="file" name="file" id="filePhoto" required/>
+             </div>
+</div>
+<div class="col-12 mb-5 pb-5">
+<select name="posttype" id="" class="col-12 mb-3">
+  <option value="Private">Private</option>
+  <option value="Public">Public</option>
+</select>
+<button class="btn btn-block blue-gradient"> POST </button>
+<button class="btn btn-block pale-gradient"> SAVE DRAFT</button>
+</div>
+</form>
+            </div>
+          <!-- Panel 1 -->
+          <!-- Panel 2 -->
+          <div class="tab-pane fade" id="panel22" role="tabpanel">
+            <h5 class="my-2 h5">Panel 2</h5>
+          </div>
+          <!-- Panel 2 -->
+        </div>
+      </div>
+    </div>
+    <!-- Nav tabs -->
+
+  </div>
+  <!-- Panel 1 -->
+
+  <!-- Panel 2 -->
+  <div class="tab-pane fade" id="panel666" role="tabpanel">
+
+    <p class="pt-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta
+      doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat
+      ratione porro voluptate odit minima.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus
+      reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione
+      porro voluptate odit minima.</p>
+
+  </div>
+  <!-- Panel 2 -->
+
+</div>
+<!-- Tab panels -->
+</div>
+{% include 'script.html'%}
+<script>
+
+var imageLoader = document.getElementById('filePhoto');
+imageLoader.addEventListener('change', handleImage, false);
+
+function handleImage(e) {
+  var reader = new FileReader();
+  reader.onload = function (event) {
+      $('.uploader img').attr('src',event.target.result);
+  }
+  reader.readAsDataURL(e.target.files[0]);
+}
+function handleImages(e) {
+  $('.uploader img').remove();
+  for(var i = 0; i < e.target.files.length; i++){
+      var reader = new FileReader();
+      reader.onload = function (event) {
+          var $img = $('<img/>');
+          $img.attr('src', event.target.result);
+          $('.uploader').append($img);
+      }
+      reader.readAsDataURL(e.target.files[i]);
+  }
+}
+</script>
+</body>
+</html>

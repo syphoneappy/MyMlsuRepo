@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Document</title>
+  <style>
+    h2{
+      font-family: 'Bebas Neue', cursive;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/css/mdb.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <!-- Material form register -->
+
+<div class="card mt-5">
+
+    <h2 class="card-header info-color white-text text-center py-4">
+        <strong>L o g I n</strong>
+    </h2>
+    <div class="card-body px-lg-5 pt-0">
+    <p class="text-center bg-warning">{{LogOutMessage}}</p>
+        <form class="text-center" style="color: #757575;" action="/" method="post">
+            <!-- E-mail -->
+            <div class="md-form mt-4 md-outline">
+                <input type="email" id="materialRegisterFormEmail" class="form-control" name="userId" required>
+                <label for="materialRegisterFormEmail">E-mail</label>
+            </div>
+
+            <!-- Password -->
+            <div class="md-form md-outline">
+                <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" name="password" required>
+                <label for="materialRegisterFormPassword">Password</label>
+                <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                    <p class="text-danger text-center mt-3">{{msg}}</p>
+                </small>
+            </div>
+
+            <!-- Sign up button -->
+            <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">LogIn</button>
+            <hr>
+            <a class="btn btn-warning btn-rounded btn-block my-2 waves-effect z-depth-0" href='/Register'>Sign in</a>
+
+        </form>
+        <!-- Form -->
+
+    </div>
+
+</div>
+<!-- Material form register -->
+  </div>
+</div>
+
+  <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
+  </body>
+</body>
+</html>

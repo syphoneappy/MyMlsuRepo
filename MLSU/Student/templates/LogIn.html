@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MLSU - Student Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Leckerli+One&family=Marck+Script&family=Monoton&family=Pacifico&family=Viga&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Leckerli+One&family=Marck+Script&family=Monoton&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+    h1,h3{
+      font-family: 'Monoton', cursive;
+    }
+    .carousel{
+      margin-top:80px;
+    }
+    h2{
+      font-family: 'Viga', sans-serif;
+    }
+    h4{
+      font-family: 'Homemade Apple', cursive;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="row">
+    <div class="col s3 hide-on-med-and-down">
+      <div class="col s12">
+        <h2 class="brand-logo"><a href="https://www.mlsu.ac.in/">MLSU</a></h2>
+      </div>
+      <div class="carousel">
+   <a class="carousel-item" href="#one!"><img src="https://www.mlsu.ac.in/photogallery//DSC01383.JPG"></a>
+   <a class="carousel-item" href="#two!"><img src="https://www.mlsu.ac.in/photogallery//DSC01375.JPG"></a>
+   <a class="carousel-item" href="#three!"><img src="https://www.mlsu.ac.in/photogallery//DSC01371.JPG"></a>
+   <a class="carousel-item" href="#four!"><img src="https://www.mlsu.ac.in/photogallery//DSC01368.JPG"></a>
+   <a class="carousel-item" href="#five!"><img src="https://www.mlsu.ac.in/photogallery//DSC01362.JPG"></a>
+   <a class="carousel-item" href="#five!"><img src="https://www.mlsu.ac.in/photogallery//DSC01359.JPG"></a>
+ </div>
+    </div>
+
+    <div class="col s6 hide-on-med-and-down">
+
+      <h1 class="green-text center-align">Log In</h1>
+        <!-- Id and roll Number -->
+
+          <p class="center-align green-text"><kbd>{{LogOutMessage}}</kbd></p>
+
+
+        <form action="/test" method="post">
+        <div class="col s12">
+        <div class="col s2"></div>
+        <div class="col s8 input-field">
+        <i class="material-icons prefix">account_circle</i>
+        <input type="text" class="validate" name="Id">
+        <label for="icon_prefix">Email or Roll Number</label>
+        </div>
+        <div class="col s2"></div>
+        </div>
+        <div class="col s12">
+        <div class="col s2"></div>
+        <div class="col s8">
+          <div class="col s12 input-field">
+            <span class="material-icons prefix">
+            vpn_key
+            </span>
+          <input type="password" class="validate" name="password">
+          <label for="icon_prefix">Password</label>
+          </div>
+        </div>
+        </div>
+        <div class="col s12 center-align">
+          <div class="col s3"></div>
+          <div class="col s6">
+          <p class="text-floating red-text red lighten-4 pulse" style="border-radius:10px">{{msg}}</p>
+          </div>
+          <div class="col s3"></div>
+        </div>
+
+        <div class="col s12">
+        <div class="col s2"></div>
+        <div class="col s8 center-align">
+          <a class="waves-effect waves-teal btn-flat">forget password</a>
+        </div>
+        </div>
+        <div class="col s12">
+        <div class="col s2"></div>
+        <div class="col s8 center-align">
+          <button class="btn waves-effect waves-light green" type="submit" name="action">Submit
+              <i class="material-icons right">send</i>
+          </button>
+        </div>
+        </div>
+        <h4 class="center-align">Or</h4>
+        <div class="col s12">
+        <div class="col s2"></div>
+        <div class="col s8 center-align">
+            <a class="btn waves-effect waves-light green"  name="action" href="/PrintReg">Register
+              <span class="material-icons">
+              how_to_reg
+              </span>
+            </a>
+        </div>
+        </div>
+        </form>
+      </div>
+      <div class="col s3 hide-on-med-and-down">
+        <h3 class="green">Latest Updates</h3>
+        {% for row in data%}
+        <div class="collection">
+          <h6 class="collection-item  teal lighten-2">Date-:&nbsp;{{row.1}}</h6>
+          <blockquote class=""><strong>{{row.2}}</strong></blockquote>
+          <blockquote class="collection-item">  {{row.3}} </blockquote>
+          <p class="lead center-align">
+            <a href="static\Global\{{row.4}}" download>Download Pdf</a>
+          </p>
+          <object data="static\Global\{{row.4}}" type="application/pdf" width="100%" height="100%">
+          </object>
+        </div>
+        {% endfor %}
+      </div>
+
+
+
+<!-- Tablet View -->
+  <div class="col s6 show-on-medium hide-on-small-only hide-on-large-only">
+
+          <h1 class="green-text center-align">Log In</h1>
+            <!-- Id and roll Number -->
+            <div class="col s12 input-field">
+            <i class="material-icons prefix">account_circle</i>
+            <input type="text" class="validate" name="Id">
+            <label for="icon_prefix">Email or Roll Number</label>
+            </div>
+
+              <div class="col s12 input-field">
+                <span class="material-icons prefix">
+                vpn_key
+                </span>
+              <input type="password" class="validate" name="password">
+              <label for="icon_prefix">Password</label>
+              </div>
+
+
+            <div class="col s12">
+            <div class="col s2"></div>
+            <div class="col s8 center-align">
+              <a class="waves-effect waves-teal btn-flat">forget password</a>
+            </div>
+            </div>
+            <div class="col s12">
+            <div class="col s2"></div>
+            <div class="col s8 center-align">
+              <button class="btn waves-effect waves-light green" type="submit" name="action">Submit
+                  <i class="material-icons right">send</i>
+              </button>
+            </div>
+            </div>
+            <h4 class="center-align">Or</h4>
+            <div class="col s12">
+            <div class="col s2"></div>
+            <div class="col s8 center-align">
+              <a class="btn waves-effect waves-light green" type="submit" name="action" href="/PrintReg">Register
+                <span class="material-icons">
+                how_to_reg
+                </span>
+              </a>
+            </div>
+            </div>
+  </div>
+  <div class="col s6 show-on-medium hide-on-small-only hide-on-large-only">
+      <h3 class="green">Latest Updates</h3>
+      {% for row in data%}
+      <div class="collection">
+        <h6 class="collection-item  teal lighten-2">Date-:&nbsp;{{row.1}}</h6>
+        <blockquote class=""><strong>{{row.2}}</strong></blockquote>
+        <blockquote class="collection-item">  {{row.3}} </blockquote>
+        <p class="lead center-align">
+          <a href="static\Global\{{row.4}}" download>Download Pdf</a>
+        </p>
+        <object data="static\Global\{{row.4}}" type="application/pdf" width="100%" height="100%">
+        </object>
+      </div>
+      {% endfor %}
+  </div>
+  <!-- Mobile -->
+  <div class="col s12 show-on-small hide-on-med-and-down hide-on-large-only">
+    <h1 class="green-text center-align">Log In</h1>
+  <div class="col">
+    <ul id="slide-out" class="sidenav light-green lighten-2">
+  <li><a href="#!"><i class="material-icons">notifications</i>Latest Updates</a></li>
+  <li><div class="divider"></div></li>
+  <li><a class="subheader">New Information</a></li>
+  <div class="row">
+  {% for row in data%}
+  <div class="col s12">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">{{row.1}}</span>
+        <span class="card-title"><strong>{{row.2}}</strong></span>
+        <p>{{row.3}}</p>
+      </div>
+      <div class="card-action">
+        <a href="static\Global\{{row.4}}">{{row.4}}</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</ul>
+<a href="#" data-target="slide-out" class="sidenav-trigger orange-text"><i class="material-icons">menu</i></a>
+  </div>
+                <!-- Id and roll Number -->
+                <div class="col s12">
+                <div class="col s2"></div>
+                <div class="col s8 input-field">
+                <i class="material-icons prefix">account_circle</i>
+                <input type="text" class="validate" name="Id">
+                <label for="icon_prefix">Email or Roll Number</label>
+                </div>
+                <div class="col s2"></div>
+                </div>
+
+                <div class="col s12">
+                  <div class="col s2"></div>
+                  <div class="col s8 input-field">
+                    <span class="material-icons prefix">
+                    vpn_key
+                    </span>
+                  <input type="password" class="validate" name="password">
+                  <label for="icon_prefix">Password</label>
+                  </div>
+                </div>
+
+
+                <div class="col s12 center-align">
+                  <a class="waves-effect waves-teal btn-flat">forget your password</a>
+                </div>
+                <div class="col s12 center-align">
+                  <button class="btn waves-effect waves-light green" type="submit" name="action">Submit
+                      <i class="material-icons right">send</i>
+                  </button>
+                </div>
+                <h4 class="center-align">Or</h4>
+                <div class="col s12 center-align">
+                  <a class="btn waves-effect waves-light green" type="submit" href="/PrintReg" name="action">Register
+                    <span class="material-icons">
+                    how_to_reg
+                    </span>
+                  </a>
+              </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(elems);
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems);
+  })
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

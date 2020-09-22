@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include 'css.html'%}
+</head>
+<body>
+  {% include 'SocialNav.html'%}
+  <div class="container">
+  {% for row in data %}
+  <div class="row mb-4">
+    <div class="col-3">
+      <div class="panel">
+      <div class="col-12 mb-3">
+        <p class="lead text-center"><strong>Posts</strong>
+        <span class="text-danger">40</span></p>
+      </div>
+      <div class="col-12 mb-3">
+        <p class="lead text-center"><strong>friends</strong>
+        <span class="text-danger">40</span></p>
+      </div>
+      <div class="col-12 mb-3">
+        <p class="lead text-center"><strong>Votes</strong>
+        <span class="text-danger">40</span></p>
+      </div>
+      <div class="col-12 mb-3">
+        <p class="lead text-center"><strong>Mutual</strong>
+        <span class="text-danger">40</span></p>
+      </div>
+      </div>
+    </div>
+    <div class="col-6">
+<div class="card testimonial-card white  text-dark">
+  <div class="avatar mx-auto white mt-3">
+    <img src="/static/images/{{row.6}}" class="rounded-circle" width=200 height=200
+      alt="woman avatar">
+  </div>
+
+  <!-- Content -->
+
+  <div class="card-body">
+    <!-- Name -->
+    <h4 class="card-title text-center">{{row.5}}</h4>
+    <form action="/StudentReq" method="post">
+    <input type="text" value="{{row.1}}" name="user1" hidden>
+    {{msg}}
+    </form>
+    <form action="/deleteReq" method="post">
+    <input type="text" value="{{row.1}}" name="user1" hidden>
+    {{msg1}}
+    </form>
+    <hr>
+    <p><i class="fas fa-quote-left"></i>       {{row.7}}                     <i class="fas fa-quote-left"></i>
+    </p>
+  </div>
+
+</div>
+</div>
+<div class="col-3">
+  <div class="col-12 mb-3">
+    <p class="display-4 text-center"><strong>Scores</strong>
+    <span class="text-danger">2003</span></p>
+  </div>
+  <div class="col-12 mb-3">
+    <p class="display-4 text-center"><strong>Scolorship</strong>
+    <span class="text-danger">10000</span></p>
+  </div>
+  <div class="col-12 text-bottom">
+    <a class="btn btn-block purple-gradient">Vote</a>
+  </div>
+</div>
+</div>
+<h1 class="display-1 mb-5 pb-5">Account Type is       {{row.8}}</h1>
+
+  {% endfor %}
+
+</div>
+  {% include 'script.html'%}
+</body>
+</html>

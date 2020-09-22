@@ -9,56 +9,46 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="d-flex justify-content-center">
         <table class="mr-5 mt-5">
-          <tr class="text-center text-light">
+         <tr class="text-center text-light">
             <th class="border-left border-top border-bottom border-light lead">S.NO/Id</th>
-            <th class="border-left border-top border-bottom border-light lead">Scheme Id</th>
-            <th class="border-left border-top border-bottom border-light lead">Scheme Name</th>
-            <th class="border-left border-top border-bottom border-light lead">update</th>
-            <th class="border-left border-top border-bottom border-right border-light lead">delete</th>
+            <th class="border-left border-top border-bottom border-light lead">Scheme</th>
+            <th class="border-left border-top border-bottom border-right border-light lead">Course</th>
+            <th class="border-left border-top border-bottom border-light lead">Year</th>
+            <th class="border-left border-top border-bottom border-light lead">edit</th>
+            <th class="border-left border-right border-top border-bottom border-light lead">delete</th
           </tr>
           {% for row in user %}
           <tr class="text-center text-light">
             <td class="border-left border-top border-bottom border-light">{{row.0}}</td>
             <td class="border-left border-top border-bottom border-light">{{row.1}}</td>
             <td class="border-left border-top border-bottom border-light">{{row.2}}</td>
-            <td class="border-left border-top border-bottom border-light">
-                <a href="/updateS/{{row.0}}" data-toggle="modal" data-target="#edit">
+            <td class="border-left border-top border-bottom border-light">{{row.3}}</td>
+            <td class="border-left border-top border-bottom border-light border-right">
+                <a href="/update/{{row.0}}" >
                 edit
               </a>
             </td>
-            <td class="border-left border-top border-bottom border-right border-light"><a href="/deleteS/{{row.0}}">delete</a></td>
-          </tr>
-          {% endfor %}<br>
-        </table>
-        <table class="m-5 p-3">
-          <tr class="text-center text-light bg-secondary">
-            <th class="border-left border-top border-bottom border-dark lead">S.NO/Id</th>
-            <th class="border-left border-top border-bottom border-dark lead">Course</th>
-            <th class="border-left border-top border-bottom border-dark lead">Year</th>
-            <th class="border-left border-top border-bottom border-dark lead">update</th>
-            <th class="border-left border-top border-bottom border-right border-dark lead">delete</th>
-          </tr>
-          {% for row in user %}
-          <tr class="text-center bg-light">
-            <td class="border-left border-top border-bottom border-dark">{{row.3}}</td>
-            <td class="border-left border-top border-bottom border-dark">{{row.4}}</td>
-            <td class="border-left border-top border-bottom border-dark bg-light">{{row.5}}</td>
-            <td class="border-left border-top border-bottom border-dark bg-light">
-                <a href="/updates/" data-toggle="modal" data-target="#edit">
-                edit
+            <td class="border-left border-top border-bottom border-light border-right">
+                <a href="/delete/{{row.0}}" >
+                delete
               </a>
             </td>
-            <td class="border-left border-top border-bottom border-right border-dark"><a href="/deleteC/{{row.3}}">delete</a></td>
           </tr>
           {% endfor %}<br>
         </table>
        </div>
-       <div class="col-12  d-flex mt-4">
-       <div class="col-6 d-flex justify-content-center">
+       <div class="col-12  d-flex mt-4 mb-3">
+       <div class="col-3 d-flex justify-content-center">
          <a href="/Excel" class="btn btn-block btn-danger">Convert into Excel</a>
        </div>
-       <div class="col-6 d-flex justify-content-center">
+       <div class="col-3 d-flex justify-content-center">
          <a href="/download" class="btn btn-block btn-warning">download Excel</a>
+       </div>
+       <div class="col-3 d-flex justify-content-center">
+         <a href="/empty" class="btn btn-primary">Empty Global Notification</a>
+       </div>
+       <div class="col-3 d-flex justify-content-center">
+         <a href="/emptyLocal" class="btn btn-warning">Empty Local Notification</a>
        </div>
        </div>
       </div>
@@ -66,4 +56,5 @@
     </ul>
     <a href="/LogOut" class="float-right lead text-danger">LogOut</a>
   </div>
+
 </nav>

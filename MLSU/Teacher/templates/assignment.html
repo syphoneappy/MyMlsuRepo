@@ -1,0 +1,202 @@
+<html lang="en">
+<head>
+  <title>Document</title>
+  <style>
+    .chip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+  }
+  .shadow-textarea textarea.form-control::placeholder {
+    font-weight: 300;
+  }
+  .shadow-textarea textarea.form-control {
+    padding-left: 0.8rem;
+  }
+  .number-input input[type="number"] {
+-webkit-appearance: textfield;
+-moz-appearance: textfield;
+appearance: textfield;
+}
+
+.number-input input[type=number]::-webkit-inner-spin-button,
+.number-input input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+}
+
+.number-input {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.number-input button {
+-webkit-appearance: none;
+background-color: transparent;
+border: none;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+margin: 0;
+position: relative;
+}
+
+.number-input button:before,
+.number-input button:after {
+display: inline-block;
+position: absolute;
+content: '';
+height: 2px;
+transform: translate(-50%, -50%);
+}
+
+.number-input button.plus:after {
+transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.number-input input[type=number] {
+text-align: center;
+}
+
+.number-input.number-input {
+border: 1px solid #ced4da;
+width: 10rem;
+border-radius: .25rem;
+}
+
+.number-input.number-input button {
+width: 2.6rem;
+height: .7rem;
+}
+
+.number-input.number-input button.minus {
+padding-left: 10px;
+}
+
+.number-input.number-input button:before,
+.number-input.number-input button:after {
+width: .7rem;
+background-color: #495057;
+}
+
+.number-input.number-input input[type=number] {
+max-width: 4rem;
+padding: .5rem;
+border: 1px solid #ced4da;
+border-width: 0 1px;
+font-size: 1rem;
+height: 2rem;
+color: #495057;
+}
+
+@media not all and (min-resolution:.001dpcm) {
+@supports (-webkit-appearance: none) and (stroke-color:transparent) {
+
+.number-input.def-number-input.safari_only button:before,
+.number-input.def-number-input.safari_only button:after {
+margin-top: -.3rem;
+}
+}
+}
+  </style>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+</head>
+<body>
+  {% include 'nav.html'%}
+  <div class="container mb-5">
+   <div class="row">
+     <form action="/assignment" method="post" class="col-12">
+      <div class="d-flex justify-content-center">
+      <div class="col-4"></div>
+      <div class="col-4 d-flex justify-content-center">
+        <div class="md-form">
+        <input type="text" id="inputDisabledEx" class="form-control" name="RollNo">
+        <label for="inputDisabledEx" class="disabled">RollNo</label>
+        </div>
+      </div>
+      <div class="col-4"></div>
+      </div>
+      <div class="d-flex justify-content-center">
+      <div class="col-6 d-flex justify-content-center">
+          <button type="submit" class="btn btn-outline-success waves-effect float-right">assignment</button>
+      </div>
+      <p class="lead mt-3">Or</p>
+      <div class="col-6 d-flex justify-content-center">
+          <button type="submit" class="btn waves-effect peach-gradient">Vote</button>
+      </div>
+      </div>
+      </form>
+  </div>
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success d-flex justify-content-center col-12 mt-4" role="alert">
+          {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+  {% endwith %}
+  <div class="row d-flex justify-content-center">
+  <form action="/AsPrequest" method="post" enctype="multipart/form-data" class="col-8">
+    {% for row in data%}
+  <div class="col-12 d-flex justify-content-center">
+  <div class="chip col-3">
+  {{row.5}}
+  </div>
+  <div class="col-9">
+    <input type="text" name="user1" value="{{row.1}}" hidden>
+  <button class="btn blue-gradient float-right" type="submit">Ask For assignment</button>
+  </div>
+  </div>
+  <div class="col-12 d-flex justify-content-center">
+  <div class="md-form col-8">
+  <input type="text" id="inputMDEx" class="form-control" name="Code" required>
+  <label for="inputMDEx">Your Subject Code</label>
+  </div>
+  <div class="def-number-input number-input safari_only col-4">
+    <p class="lead">Semester Or Year</p>
+  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+  <input class="quantity" min="0" name="quantity" value="1" type="number" required>
+  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+  </div>
+  </div>
+  <div class="md-form">
+  <input type="date" id="inputMDEx" class="form-control" name="date" required>
+  <label for="inputMDEx">Last Date Of Submission</label>
+  </div>
+  <div class="form-group shadow-textarea">
+  <label for="exampleFormControlTextarea6">Assignment Details</label>
+  <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="8" placeholder="Write discription about assignment here..." name="detail" required></textarea>
+  </div>
+  {%endfor%}
+  </form>
+  </div>
+  </div>
+  <footer class="page-footer font-small aqua-gradient fixed-bottom">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href="https://mdbootstrap.com/"> Harsh Tripathi</a>
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+</body>
+</html>

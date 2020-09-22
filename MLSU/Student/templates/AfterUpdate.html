@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+
+   <div class="container">
+     <div class="row">
+       <h1>Form</h1>
+       <form action="/updateafter" method="post" enctype="multipart/form-data">
+         <input type="text" name="Email" value="{{Email}}" hidden>
+
+       <div class="input-field col s12">
+         <input placeholder="Enter Your Name to Update" id="first_name" type="text" class="validate" name="Name">
+         <label for="first_name">Enter Full Name To Update</label>
+       </div>
+       <div class="file-field input-field col s12">
+        <div class="btn">
+          <span>Profile Picture</span>
+          <input type="file" multiple name="file">
+          </div>
+          <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Update one file" name="file">
+          </div>
+        </div>
+        <div class="center-align">
+          <button class="btn purple darken-4 waves-effect waves-light" type="submit">Submit
+          <i class="material-icons right">send</i>
+          </button>
+        </div>
+        </form>
+     </div>
+   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

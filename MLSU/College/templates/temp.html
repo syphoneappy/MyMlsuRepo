@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+    .mtfour{
+      position:absolute;
+      top:30%;
+      left:40%;
+      transform:translate(40%,40%);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="d-flex m-5 mtfour">
+  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  </div>
+  <form action="/accept" method="post" id="red">
+  <div class=" mt-5" style="height; width:100%" id="redirect">
+    {% for row in data%}
+    <input type="text" value="{{row.0}}" name="No0" hidden>
+    <input type="text" value="{{row.1}}" name="No1" hidden>
+    <input type="text" value="{{row.2}}" name="No2" hidden>
+    {% endfor %}
+    <div class="col-12 mt-2">
+      <button class="btn btn-primary btn-block " type="submit">YES</button>
+    </div>
+    <div class="col-12 mt-2">
+      <a class="btn btn-warning btn-block" href="/Homes">NO</a>
+    </div>
+
+  </div>
+  </form>
+</div>
+<script>
+  document.getElementById("redirect").style.display = "none";
+  window.setInterval(function(){
+document.getElementById("red").submit();
+}, 1000);
+</script>
+</body>
+</html>
